@@ -7,7 +7,7 @@ import path from "path";
 import fs from "fs";
 
 // our packages
-import { AnimeWatcher } from "../api";
+import { Abyss } from "../api";
 
 // our components
 
@@ -40,7 +40,7 @@ class Episode extends Component {
 
   async init(props) {
     const { location } = props;
-    const file = await AnimeWatcher.Episode(location.state);
+    const file = await Abyss.Episode(location.state);
 
     this.setState({
       episode: location.state,

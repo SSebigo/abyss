@@ -7,7 +7,7 @@ import _ from "lodash";
 
 // our packages
 import db from "../db";
-import { AnimeWatcher } from "../api";
+import { Abyss } from "../api";
 
 // our components
 import Episode from "../components/Episode";
@@ -59,7 +59,7 @@ class Series extends Component {
 
   async init(props) {
     const series = await this.getSeries(props);
-    AnimeWatcher.Episodes(series);
+    Abyss.Episodes(series);
   }
 
   render() {

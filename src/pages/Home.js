@@ -6,7 +6,7 @@ import _ from "lodash";
 
 // our packages
 import db from "../db";
-import { AnimeWatcher } from "../api";
+import { Abyss } from "../api";
 
 // our components
 import Series from "../components/Series";
@@ -20,7 +20,7 @@ class Home extends Component {
     };
 
     // trigger series catalogue loading
-    AnimeWatcher.Series();
+    Abyss.Series();
   }
 
   componentDidMount() {

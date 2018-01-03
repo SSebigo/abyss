@@ -19,9 +19,9 @@ import {
 // TODO: make user select target directory
 // Better use a test directory if you don't want
 // to lose things
-export const TargetDirectory = "path/to/your/anime/directory/for/tests";
+export const TargetDirectory = "path/to/your/anime/test/directory/";
 
-export const AnimeWatcher = {
+export const Abyss = {
   async Series() {
     const series = await readdirAsync(TargetDirectory);
 
