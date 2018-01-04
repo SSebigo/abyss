@@ -1,6 +1,5 @@
 // npm packages
 // import notDefined from "not-defined";
-import _ from "lodash";
 import ffmpeg from "fluent-ffmpeg";
 import filename from "file-name";
 import fs from "fs";
@@ -8,26 +7,34 @@ import fs from "fs";
 // our packages
 import db from "../db";
 import {
+  beautifyFolders,
   convertEpisode,
   documentifyEpisodes,
   documentifySeries,
   extractEpisodeSubtitles,
   readdirAsync
 } from "../utils";
-// import { Popura } from "./Popura";
 
 // TODO: make user select target directory
 // Better use a test directory if you don't want
 // to lose things
-export const TargetDirectory = "path/to/your/anime/test/directory/";
+export const TargetDirectory = "path/to/your/anime/test/directory";
 
 export const Abyss = {
   async Series() {
+    // TODO: find a way to avoid this first read
+    // to decrease launch time
     const series = await readdirAsync(TargetDirectory);
 
     // console.log("series:", series);
 
-    const seriesDocs = documentifySeries(series, TargetDirectory);
+    await beautifyFolders(series, TargetDirectory);
+
+    const beautifySeries = await readdirAsync(TargetDirectory);
+
+    // console.log("beautify series:", beautifySeries);
+
+    const seriesDocs = documentifySeries(beautifySeries, TargetDirectory);
 
     // console.log("series docs JSON:", JSON.stringify(seriesDocs));
     // console.log("series docs:", seriesDocs);

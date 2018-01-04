@@ -1,10 +1,12 @@
 // npm packages
-import fs from "fs-extra";
-import path from "path";
+import _ from "lodash";
 import cloudinary from "cloudinary";
 import ffmpeg from "fluent-ffmpeg";
+import fs from "fs-extra";
+import path from "path";
 
 // our packages
+import { Popura } from "../api/Popura";
 const cloudinaryConfig = require("../../cloudinary_config.json");
 
 // configure cloudinary
@@ -26,8 +28,90 @@ export let readdirAsync = path => {
   });
 };
 
-export let documentifySeries = (array, directory) => {
-  return array.map(element => {
+export let beautifyFolders = (series, targetDirectory) => {
+  return new Promise(async resolve => {
+    const animeList = await Popura.getAnimeList();
+
+    // console.log("anime list:", animeList);
+
+    // beautify given directory
+    const promises = [];
+
+    series.map(s => {
+      animeList.list.map(anime => {
+        // remove duplicate synonyms in anime series_synonyms
+        // remove empty elements from array series_synonyms
+        // concat main anime title with series_synonyms
+        const titles = _.uniq(
+          _.compact(anime.series_synonyms)
+            .concat(anime.series_title)
+            .filter(isLongEnough)
+            .sort()
+        );
+
+        // console.log("titles:", titles);
+        titles.map(title => {
+          // prepare two important variables for beaufification step
+          const beautifyID = s
+            .toLowerCase()
+            .replace(/[\W_]+/g, " ")
+            .trim();
+
+          const beautifyTitle = title
+            .toLowerCase()
+            .replace(/[\W_]+/g, " ")
+            .trim();
+
+          if (
+            isLongEnough(beautifyTitle) &&
+            _.includes(beautifyID, beautifyTitle) &&
+            !_.isEqual(beautifyID, beautifyTitle)
+          ) {
+            // console.log("Good to be beautify");
+            // console.log("beautifyID:", beautifyID);
+            // console.log("beautifyTitle:", beautifyTitle);
+
+            promises.push(
+              Promise.resolve(
+                new Promise((resolve, reject) => {
+                  const dirPath = path.join(targetDirectory, s);
+                  console.log("url:", dirPath);
+                  fs.lstat(dirPath, (err, stats) => {
+                    if (err) reject(err);
+                    if (stats.isFile()) {
+                      console.log("It's a file. Create a folder and move it in.");
+                    } else if (stats.isDirectory()) {
+                      fs.rename(
+                        dirPath,
+                        path.join(targetDirectory, title),
+                        err => {
+                          if (err) reject(err);
+                          resolve();
+                        }
+                      );
+                    }
+                  });
+                })
+              )
+            );
+          } else {
+            return;
+          }
+        });
+      });
+    });
+
+    // // beautify directory
+    // // TODO: maybe there's a better solution but for now it ok
+    await Promise.all(promises);
+    // .then(res => console.log("all promise res: ", res));
+    // .catch(err => console.log("all promise err: ", err));
+    resolve();
+  });
+};
+
+export let documentifySeries = (series, directory) => {
+  return series.map(element => {
     const url = path.resolve(directory, element);
 
     const image = cloudinary.url(element.toLowerCase() + (".jpg" || ".png"), {
@@ -38,8 +122,8 @@ export let documentifySeries = (array, directory) => {
   });
 };
 
-export let documentifyEpisodes = (id, array, directory) => {
-  return array.map(element => {
+export let documentifyEpisodes = (id, episodes, directory) => {
+  return episodes.map(element => {
     const url = path.resolve(directory, element);
 
     const anime_title = directory.split("\\").pop();

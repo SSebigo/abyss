@@ -2026,10 +2026,6 @@ normalize-package-data@^2.3.2, normalize-package-data@^2.3.4:
     semver "2 || 3 || 4 || 5"
     validate-npm-package-license "^3.0.1"
 
-not-defined@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/not-defined/-/not-defined-2.0.1.tgz#63de0f82e4d616cb7e1db706f46659df1ade71c3"
-
 nugget@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/nugget/-/nugget-2.0.1.tgz#201095a487e1ad36081b3432fa3cada4f8d071b0"

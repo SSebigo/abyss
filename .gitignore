@@ -30,3 +30,4 @@ node_modules
 # my ignores
 cloudinary_config.json
 code_samples.txt
+code_samples.js

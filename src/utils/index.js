@@ -1,4 +1,5 @@
 export {
+  beautifyFolders,
   convertEpisode,
   documentifyEpisodes,
   documentifySeries,
