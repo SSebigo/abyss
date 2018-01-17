@@ -79,7 +79,9 @@ export let beautifyFolders = (series, targetDirectory) => {
                   fs.lstat(dirPath, (err, stats) => {
                     if (err) reject(err);
                     if (stats.isFile()) {
-                      console.log("It's a file. Create a folder and move it in.");
+                      console.log(
+                        "It's a file. Create a folder and move it in."
+                      );
                     } else if (stats.isDirectory()) {
                       fs.rename(
                         dirPath,
@@ -242,4 +244,15 @@ export let removeDuplicate = arr => {
 
 export let isLongEnough = value => {
   return value.length > 1;
+};
+
+export let isEpisode = (array, title) => {
+  let isEp = false;
+
+  array.map(a => {
+    if (_.isEqual(a, title)) {
+      isEp = true;
+    }
+  });
+  return isEp;
 };

@@ -1,17 +1,20 @@
 // npm packages
-// import notDefined from "not-defined";
+import _ from "lodash";
 import ffmpeg from "fluent-ffmpeg";
 import filename from "file-name";
 import fs from "fs";
 
 // our packages
 import db from "../db";
+import { Popura } from "../api/Popura";
 import {
   beautifyFolders,
   convertEpisode,
   documentifyEpisodes,
   documentifySeries,
   extractEpisodeSubtitles,
+  isEpisode,
+  isLongEnough,
   readdirAsync
 } from "../utils";
 
@@ -62,27 +65,52 @@ export const Abyss = {
     return episodes;
   },
   async Episode(episode) {
-    console.log("Episode playing:", episode);
+    // console.log("Episode playing:", episode);
 
     const file = filename(episode._id);
     const convertedVideoPath = `${episode.directory_url}\\${file}.mp4`;
     const subtitlesPath = `${episode.directory_url}\\${file}.vtt`;
 
-    console.log("converted video path:", convertedVideoPath);
-    console.log("subtitles path:", subtitlesPath);
+    // console.log("converted video path:", convertedVideoPath);
+    // console.log("subtitles path:", subtitlesPath);
 
     // const stop = movie => {
     //   return movie.ffmpegProc.stdin.write("q");
     // };
 
+    const anime = await Popura.searchAnimes(episode.anime_title);
+
+    // console.log("anime:", anime);
+
+    let animeList = await Popura.getAnimeList();
+    animeList = animeList.list;
+
+    // console.log("anime list:", animeList);
+
+    const watched_episodes = _.find(animeList, o => {
+      return isEpisode(
+        o.series_synonyms.concat(o.series_title),
+        episode.anime_title
+      );
+    }).my_watched_episodes;
+
+    // console.log("watched episode:", watched_episodes);
+
     const video = await convertEpisode(episode.url, convertedVideoPath);
 
     const subtitles = await extractEpisodeSubtitles(episode.url, subtitlesPath);
 
-    console.log("video:", video);
-    console.log("subtitles:", subtitles);
+    // console.log("video:", video);
+    // console.log("subtitles:", subtitles);
 
-    return { video, subtitles };
+    return {
+      id: anime[0].id,
+      episodes: anime[0].episodes,
+      video,
+      subtitles,
+      episode_number: episode.episode_info.episode_number,
+      watched_episodes
+    };
   },
   Search() {}
 };

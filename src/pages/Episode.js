@@ -8,6 +8,7 @@ import fs from "fs";
 
 // our packages
 import { Abyss } from "../api";
+import { Popura } from "../api/Popura";
 
 // our components
 
@@ -42,13 +43,15 @@ class Episode extends Component {
     const { location } = props;
     const file = await Abyss.Episode(location.state);
 
+    console.log("episode file:", file);
+
     this.setState({
       episode: location.state,
       file
     });
   }
 
-  goBackToEpisode(episodePath, subtitlesPath, history) {
+  goBackToEpisodes(episodePath, subtitlesPath, history) {
     fs.unlink(episodePath, err => {
       if (err) throw err;
       console.log("Episode file deleted.");
@@ -60,6 +63,21 @@ class Episode extends Component {
     });
 
     history.goBack();
+  }
+
+  updateMyAnimeList(id, episodes, episode_number, watched_episodes) {
+    // console.log("id:", id);
+    // console.log("episode_number:", episode_number);
+    if (episode_number === episodes) {
+      Popura.updateAnime(id, {
+        episode: parseInt(episode_number),
+        status: "completed"
+      }).then(res => console.log(res));
+    } else if (episode_number > watched_episodes) {
+      Popura.updateAnime(id, { episode: parseInt(episode_number) }).then(res =>
+        console.log("res:", res)
+      );
+    }
   }
 
   render() {
@@ -76,6 +94,14 @@ class Episode extends Component {
           controls
           autoPlay
           preload="auto"
+          onEnded={() =>
+            this.updateMyAnimeList(
+              file.id,
+              file.episodes,
+              file.episode_number,
+              file.watched_episodes
+            )
+          }
         >
           <source src={file.video} type="video/mp4" />
           <track
@@ -98,7 +124,7 @@ class Episode extends Component {
                 href="#back"
                 className="button"
                 onClick={() =>
-                  this.goBackToEpisode(file.video, file.subtitles, history)
+                  this.goBackToEpisodes(file.video, file.subtitles, history)
                 }
               >
                 <span className="icon">

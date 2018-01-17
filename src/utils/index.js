@@ -4,6 +4,7 @@ export {
   documentifyEpisodes,
   documentifySeries,
   extractEpisodeSubtitles,
+  isEpisode,
   isLongEnough,
   readdirAsync,
   removeDuplicate
