@@ -43,7 +43,7 @@ class Episode extends Component {
     const { location } = props;
     const file = await Abyss.Episode(location.state);
 
-    console.log("episode file:", file);
+    // console.log("episode file:", file);
 
     this.setState({
       episode: location.state,
