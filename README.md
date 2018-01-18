@@ -2,6 +2,24 @@
 
 The goal of Abyss is to provide an alternative to Taiga.
 
+---
+**NOTES**
+
+The current version of Abyss is a **developper** version.
+Be sure to have **FFMPEG** install on your device.
+<br />
+<br />
+In Popura.js file, modify this line:
+```javascript
+export const Popura = popura("Your MyAnimeList username", "Your MyAnimeList password");
+```
+In Abyss.js file, modify this line:
+```javascript
+export const TargetDirectory = "path/to/your/anime/test/directory";
+
+```
+---
+
 ## ScreenShots
 
 #### Abyss anime selection page
@@ -19,7 +37,7 @@ The goal of Abyss is to provide an alternative to Taiga.
 ### TODO
 
 - [ ] Improve video conversion with ffmpeg
-- [ ] Package ffmpeg
+- [ ] Embed ffmpeg in the release version
 - [ ] Add episodes thumbnail
 - [ ] Improve UI & UX
 - [ ] Launch Beta version
