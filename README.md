@@ -5,8 +5,8 @@ The goal of Abyss is to provide an alternative to Taiga.
 ---
 **NOTES**
 
-The current version of Abyss is a **developper** version.
-Be sure to have **FFMPEG** install on your device.
+The current version of Abyss is a **developer** version.
+Be sure to have **FFMPEG** installed on your device.
 <br />
 <br />
 In Popura.js file, modify this line:
