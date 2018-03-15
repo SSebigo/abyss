@@ -20,6 +20,35 @@ export const TargetDirectory = "path/to/your/anime/test/directory";
 ```
 ---
 
+**HOW TO USE**
+
+1. Install FFMPEG
+<dl>
+  <dt>Windows</dt>
+  <dd>Follow this link: [wikiHow: How to install FFmpeg on Windows](https://www.wikihow.com/Install-FFmpeg-on-Windows)</dd>
+
+  <dt>Ubuntu</dt>
+  <dd>sudo add-apt-repository ppa:mc3man/trusty-media</dd>
+  <dd>sudo apt-get update</dd>
+  <dd>sudo apt-get install ffmpeg</dd>
+</dl>
+
+2. Clone repository
+
+3. Start developing
+<dl>
+  <dt>NPM</dt>
+  <dd>npm install</dd>
+  <dd>npm start</dd>
+
+  <dt>Yarn</dt>
+  <dd>yarn install</dd>
+  <dd>yarn start</dd>
+</dl>
+
+
+---
+
 ## ScreenShots
 
 #### Abyss anime selection page
