@@ -22,7 +22,7 @@ export const TargetDirectory = "path/to/your/anime/test/directory";
 
 **HOW TO USE**
 
-1. Install FFMPEG
+### 1. Install FFMPEG
 <dl>
   <dt>Windows</dt>
   <dd>Follow this link: [wikiHow: How to install FFmpeg on Windows](https://www.wikihow.com/Install-FFmpeg-on-Windows)</dd>
@@ -33,9 +33,9 @@ export const TargetDirectory = "path/to/your/anime/test/directory";
   <dd>sudo apt-get install ffmpeg</dd>
 </dl>
 
-2. Clone repository
+### 2. Clone repository
 
-3. Start developing
+### 3. Start developing
 <dl>
   <dt>NPM</dt>
   <dd>npm install</dd>
@@ -45,7 +45,6 @@ export const TargetDirectory = "path/to/your/anime/test/directory";
   <dd>yarn install</dd>
   <dd>yarn start</dd>
 </dl>
-
 
 ---
 
