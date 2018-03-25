@@ -1,0 +1,49 @@
+{
+  "name": "abyss",
+  "version": "1.0.0",
+  "description": "The goal of Abyss is to provide an alternative to Taiga.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode development",
+    "prestart": "yarn build",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SSebigo/abyss.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SSebigo/abyss/issues"
+  },
+  "homepage": "https://github.com/SSebigo/abyss#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "electron": "^1.8.4",
+    "file-loader": "^1.1.11",
+    "prettier": "^1.11.1",
+    "url-loader": "^1.0.1",
+    "webpack": "^4.2.0",
+    "webpack-cli": "^2.0.13"
+  },
+  "dependencies": {
+    "bulma": "^0.6.2",
+    "cloudinary": "^1.11.0",
+    "file-name": "^0.1.0",
+    "fluent-ffmpeg": "^2.1.2",
+    "fs-extra": "^5.0.0",
+    "lodash": "^4.17.5",
+    "popura": "^1.2.5",
+    "pouchdb-browser": "^6.4.3",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2",
+    "rxjs": "^5.5.7"
+  }
+}
