@@ -7,7 +7,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     publicPath: "/",
     filename: "bundle.js",
-    libraryTarget: 'commonjs2'
+    libraryTarget: "commonjs2"
   },
   module: {
     rules: [
@@ -15,6 +15,10 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: ["babel-loader"]
+      },
+      {
+        test: /\.scss$/,
+        use: ["style-loader", "css-loader", "sass-loader"]
       }
     ]
   },

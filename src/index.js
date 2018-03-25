@@ -4,6 +4,9 @@ import ReactDOM from "react-dom";
 import { HashRouter, Route, Switch } from "react-router-dom";
 
 // our packages
+// styles
+import "./sass/main.scss";
+
 // components
 
 // pages
