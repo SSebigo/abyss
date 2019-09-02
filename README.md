@@ -3,6 +3,9 @@
 The goal of Abyss is to provide an alternative to Taiga.
 
 ---
+## STATUS: FAILURE
+
+---
 **NOTES**
 
 The current version of Abyss is a **developer** version.
